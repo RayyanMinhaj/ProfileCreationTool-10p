@@ -238,7 +238,7 @@ def process_file():
 
     set_font_style(new_file, font_name='Arial')
 
-    new_file.save('NewSampleFormatCV.docx')
+    #new_file.save('NewSampleFormatCV.docx')
     
     #print(profile_data["Work Summary"])
     #print(profile_data["Missing Keywords"])
