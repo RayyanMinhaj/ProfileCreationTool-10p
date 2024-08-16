@@ -11,13 +11,13 @@ import re
 from io import BytesIO
 from docx.shared import Pt
 from docx.oxml.ns import qn
-import streamlit as st
 
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = 'uploads'
 
 load_dotenv()
 key = os.getenv("OPENAI_API_KEY")
+
 
 #key = st.secrets["OPENAI_API_KEY"]
 
