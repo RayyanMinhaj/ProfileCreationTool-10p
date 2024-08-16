@@ -19,7 +19,6 @@ load_dotenv()
 key = os.getenv("OPENAI_API_KEY")
 
 
-#key = st.secrets["OPENAI_API_KEY"]
 
 def set_font_style(document, font_name='Arial'):
         for paragraph in document.paragraphs:
@@ -263,6 +262,10 @@ def download_file():
     file_path = request.args.get('file_path')
     return send_file(file_path, as_attachment=True, download_name=filename)
 
+
+@app.route('/hello', methods=['GET'])
+def hello_world():
+    return 'Hello, World!'
 
 if __name__ == '__main__':
     app.run(debug=True)
