@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Set the API URL
-API_URL = "http://127.0.0.1:5000"
+API_URL = "https://profile-creation-tool-10p-1h3r-r45cp2fze-rayyanminhajs-projects.vercel.app/"
 
 st.set_page_config(page_title="10Pearls User Profile Conversion Tool")
 
