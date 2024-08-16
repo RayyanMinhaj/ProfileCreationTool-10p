@@ -262,10 +262,5 @@ def download_file():
     file_path = request.args.get('file_path')
     return send_file(file_path, as_attachment=True, download_name=filename)
 
-
-@app.route('/hello', methods=['GET'])
-def hello_world():
-    return key
-
 if __name__ == '__main__':
     app.run(debug=True)
