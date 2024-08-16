@@ -90,7 +90,7 @@ def gpt_response(old_doc_text, job_description):
     response = client.chat.completions.create(
         model='gpt-3.5-turbo-16k',
         messages=[{"role": "assistant", "content": [{"type": "text", "text": prompt}]}],
-        max_tokens=3000,
+        max_tokens=2000,
         temperature=0.2,
         top_p=1.0
     )
