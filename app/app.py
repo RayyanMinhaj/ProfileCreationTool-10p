@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, session
 import os
 import tempfile
 from docx.shared import Pt
@@ -113,6 +113,10 @@ def process_file():
 
     file_stream = BytesIO(file.read())
     old_doc = Document(file_stream)
+
+    original_filename = os.path.splitext(file.filename)[0]
+    new_filename = f"{original_filename}_CONVERTED.docx"
+    new_filename = new_filename.replace(' ','')
 
     #old_doc.save("puranaDocument.docx")
 
@@ -240,7 +244,7 @@ def process_file():
 
     #Save new file to a temporary location
     temp_dir = tempfile.gettempdir()
-    new_file_path = os.path.join(temp_dir, "new_file.docx")
+    new_file_path = os.path.join(temp_dir, new_filename)
     new_file.save(new_file_path)
 
     # Return the match percentage, missing keywords, and download link
@@ -253,10 +257,10 @@ def process_file():
 
 @app.route('/download', methods=['GET'])
 def download_file():
+    filename = request.args.get('new_filename')
     file_path = request.args.get('file_path')
-    return send_file(file_path, as_attachment=True, download_name='new_file.docx')
+    return send_file(file_path, as_attachment=True, download_name=filename)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-

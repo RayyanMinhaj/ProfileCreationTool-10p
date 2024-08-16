@@ -4,9 +4,12 @@ import requests
 # Set the API URL
 API_URL = "http://127.0.0.1:5000"
 
+st.set_page_config(page_title="10Pearls User Profile Conversion Tool")
+
 st.title("10Pearls User Profile Creation")
 st.write('Converting old user profiles or CVs into a standardized format along with match percentage.')
 st.markdown("""---""")
+
 
 uploaded_file = st.file_uploader("Choose a file")
 job_description = st.text_area("Job Description")
@@ -25,11 +28,10 @@ if st.button("Submit"):
             match_percentage = result.get("percentage_match")
             missing_keywords = result.get("missing_keywords")
             download_link = f"{API_URL}{result.get('download_link')}"
-            
-            # Display results
+
             st.write(f"Match Percentage: {match_percentage}")
             st.write(f"Missing Keywords: {missing_keywords}")
-            
+
             # Provide download link
             st.markdown(f"[Download Converted File!]({download_link})")
         else:
