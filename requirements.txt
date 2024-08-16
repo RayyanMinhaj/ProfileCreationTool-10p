@@ -1,4 +1,0 @@
-python-docx==0.8.11
-openai==1.40.6
-gradio==3.0.17
-python-dotenv==0.21.0

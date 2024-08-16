@@ -16,10 +16,10 @@ import streamlit as st
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = 'uploads'
 
-#load_dotenv()
-#key = os.getenv("OPENAI_API_KEY")
+load_dotenv()
+key = os.getenv("OPENAI_API_KEY")
 
-key = st.secrets["OPENAI_API_KEY"]
+#key = st.secrets["OPENAI_API_KEY"]
 
 def set_font_style(document, font_name='Arial'):
         for paragraph in document.paragraphs:
