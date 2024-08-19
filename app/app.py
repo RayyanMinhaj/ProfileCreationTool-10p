@@ -101,7 +101,7 @@ def gpt_response(old_doc_text, job_description):
         model='gpt-3.5-turbo-16k',
         messages=[{"role": "assistant", "content": [{"type": "text", "text": prompt}]}],
         max_tokens=2000,
-        temperature=0.2,
+        temperature=0.1,
         top_p=1.0
     )
 
