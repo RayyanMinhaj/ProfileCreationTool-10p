@@ -78,10 +78,10 @@ def gpt_response(old_doc_text, job_description):
     Key Skills & Competencies: (Identify and extract at least 6 attributes from the profile and explain them. Examples include "technical expertise", "technical toolkit", "communication and collaboration")
     Academic Summary: (Display as provided)
     Work Summary: (Provide in detailed paragraphs without altering any information. For each project, include the following details)
-    - Project x: (where x is a number, followed by name of the project, this CAN NOT be empty)
-    - Environment: (Always identify and display the job role from the respective project separated by commas, this CAN NOT be empty)
-    - Outline: (For each project, give the overview of the project, this CAN NOT be empty )
-    - Responsibilities: (For each project, detail the responsibilities separated by commas, do NOT use points, this CAN NOT be empty)
+    - Project x: (where x is a number, followed by name of the project, this CANNOT be empty)
+    - Environment: (Always identify and display the job role from the respective project separated by commas, this CANNOT be empty)
+    - Outline: (For each project, give the overview of the project, this CANNOT be empty )
+    - Responsibilities: (For each project, detail the responsibilities separated by commas, do NOT use points, this CANNOT be empty)
 
 
     Here is an example of Work Summary (it should strictly follow this format!):
