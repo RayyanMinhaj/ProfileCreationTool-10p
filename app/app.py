@@ -11,6 +11,7 @@ import re
 from io import BytesIO
 from docx.shared import Pt
 from docx.oxml.ns import qn
+import docx2txt
 
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = 'uploads'
@@ -113,7 +114,14 @@ def process_file():
         return jsonify({"error": "No selected file"}), 400
 
     file_stream = BytesIO(file.read())
-    old_doc = Document(file_stream)
+    
+    #old_doc = Document(file_stream)
+
+    #Changing DOcument from docx lib to docx2txt lib
+    old_doc_text = docx2txt.process(file_stream)
+    
+    print(old_doc_text)
+
 
     original_filename = os.path.splitext(file.filename)[0]
     new_filename = f"{original_filename}_CONVERTED.docx"
@@ -121,11 +129,10 @@ def process_file():
 
     #old_doc.save("puranaDocument.docx")
 
-    old_doc_text = ""
+    #old_doc_text = ""
 
-    for paragraph in old_doc.paragraphs:
-        old_doc_text += paragraph.text + "\n"
-
+    #for paragraph in old_doc.paragraphs:
+    #    old_doc_text += paragraph.text + "\n"
 
 
     resp = gpt_response(old_doc_text, job_description)
@@ -247,6 +254,10 @@ def process_file():
     temp_dir = tempfile.gettempdir()
     new_file_path = os.path.join(temp_dir, new_filename)
     new_file.save(new_file_path)
+
+
+    #releasing old_doc_text buffer
+    old_doc_text=''
 
     # Return the match percentage, missing keywords, and download link
     return jsonify({
