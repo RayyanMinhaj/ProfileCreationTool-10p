@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_file, session
 import os
 import tempfile
-from docx.shared import Pt
+from docx.shared import Pt, Inches
 from openai import Client
 from docx import Document
 from docx.enum.section import WD_SECTION
@@ -22,10 +22,19 @@ key = os.getenv("OPENAI_API_KEY")
 
 
 def set_font_style(document, font_name='Arial'):
-        for paragraph in document.paragraphs:
-            for run in paragraph.runs:
-                run.font.name = font_name
-                run._element.rPr.rFonts.set(qn('w:eastAsia'), font_name)  # For East Asian text support
+    for paragraph in document.paragraphs:
+        for run in paragraph.runs:
+            run.font.name = font_name
+            run._element.rPr.rFonts.set(qn('w:eastAsia'), font_name) 
+
+    
+    for table in document.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    for run in paragraph.runs:
+                        run.font.name = font_name
+                        run._element.rPr.rFonts.set(qn('w:eastAsia'), font_name)
 
 
 def replace_placeholder(paragraph, placeholder, replacement):
@@ -233,13 +242,30 @@ def process_file():
         if "${worksummary}" in paragraph.text:
             paragraph.clear()
             for project in profile_data["Work Summary"]:
-                project_paragraph = new_file.add_paragraph()
-                bold_text(project_paragraph, "Project: ")
-                project_paragraph.add_run(project["Project"])
-                new_file.add_paragraph(f"Environment: {project['Environment']}")
-                new_file.add_paragraph(f"Outline: {project['Outline']}")
-                new_file.add_paragraph(f"Responsibilities: {project['Responsibilities']}")
-                new_file.add_paragraph("\n")  # Add new line after each project
+                table = new_file.add_table(rows=0, cols=2)
+                
+                # Add row for Environment
+                row_cells = table.add_row().cells
+                row_cells[0].text = "Environment:" + "\n" + project["Environment"]
+                bold_heading = project['Project']
+                
+                cell_paragraph = row_cells[1].paragraphs[0]
+                cell_paragraph.clear()
+                run = cell_paragraph.add_run(bold_heading)
+                run.bold = True
+                
+                # Add the rest of the outline text to the same paragraph
+                cell_paragraph.add_run("\n" + project["Outline"])
+                
+
+                row_cells = table.add_row().cells
+                row_cells[0].width = Inches(1)  # Adjust column width
+                row_cells[1].width = Inches(5)  # Adjust column width
+                row_cells[1].text = "Responsibilities:" "\n" + project["Responsibilities"]
+                
+                # Add space and border between tables
+
+                new_file.add_paragraph("\n")
 
 
 
