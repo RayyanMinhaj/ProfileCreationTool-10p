@@ -76,7 +76,7 @@ def gpt_response(old_doc_text, job_description):
     Job Role: (Extract and display the profile's Job Role from the summary as the heading)
     Summary: (Keep the summary the same)
     Key Skills & Competencies: (Identify and extract heading like "1. Technical Expertise" or "2. Technical Toolkits" from the profile and then elaborate them in 2-3 words after a colon (Start directly from action words, do not use the persons name in this section). KEEP THE HEADINGS GENERIC AND FOLLOW THE EXAMPLE BELOW
-    Academic Summary: (Display as provided) - must be in bullet points
+    Academic Summary: (Display as provided) - must be in bullet points. Ensure that "Masters" degrees always come before "Bachelors"
     Work Summary: (Provide in detailed paragraphs without altering any information. For each project, include the following details)
     - Project x: (where x is a number, followed by name of the project, this CANNOT be empty)
     - Environment: (Always identify and display the job role from the respective project separated by commas, this CANNOT be empty)
