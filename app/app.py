@@ -75,8 +75,8 @@ def gpt_response(old_doc_text, job_description):
     Missing Keywords: (Keywords that are present in job description but not in users profile)
     Job Role: (Extract and display the profile's Job Role from the summary as the heading)
     Summary: (Keep the summary the same)
-    Key Skills & Competencies: (Identify and extract at least 6 attributes from the profile and explain them. Examples include "technical expertise", "technical toolkit", "communication and collaboration")
-    Academic Summary: (Display as provided)
+    Key Skills & Competencies: (Identify and extract heading like "1. Technical Expertise" or "2. Technical Toolkits" from the profile and then elaborate them in 2-3 words after a colon (Start directly from action words, do not use the persons name in this section). KEEP THE HEADINGS GENERIC AND FOLLOW THE EXAMPLE BELOW
+    Academic Summary: (Display as provided) - must be in bullet points
     Work Summary: (Provide in detailed paragraphs without altering any information. For each project, include the following details)
     - Project x: (where x is a number, followed by name of the project, this CANNOT be empty)
     - Environment: (Always identify and display the job role from the respective project separated by commas, this CANNOT be empty)
@@ -91,9 +91,12 @@ def gpt_response(old_doc_text, job_description):
     Responsibilities: Developed and maintain desktop-based business applications built on ASP.NET. Worked on scripting and performed unit testing. Worked on WinForms and review integrations between applications. Implemented procedures for gathering and analysis of user and business needs for solutions. Worked on troubleshooting, debugging and resolution of production issues along with support services.
     
 
-    Here is an example of Key Skills & Competencies: Technical Expertise: Munazza has 5+ years of experience in manual and automation software testing, with a strong understanding of test management and defect tracking systems.
-    Technical Toolkit: Munazza is skilled in using tools such as Selenium WebDriver, Appium, and Cypress for test automation.                       
-    """
+    Here is an example of Key Skills & Competencies (it should strictly follow this format!):
+    1. Technical Toolkit: Swift, iOS, Flutter, XCode
+    2. Business User Requirement Gathering: 6+ years of experience eliciting and documenting user requirements, translating them into clear and actionable BRDs. Proven ability to break down complex projects into manageable deliverables.
+    3. Communication and Collaboration: Strong communication skills, evidenced by effective collaboration with clients and teams. Acted as a bridge between commercial and technical divisions
+
+        """
 
 
 
@@ -299,6 +302,7 @@ def download_file():
     file_path = request.args.get('file_path')
     return send_file(file_path, as_attachment=True, download_name=filename)
 
+#testing
 @app.route('/hello', methods=['GET'])
 def hello_world():
     return "hello world"
