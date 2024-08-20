@@ -190,11 +190,13 @@ def process_file():
 
     # Populate profile_data with extracted projects
     for project in projects:
+        responsibilities = project[3].strip().replace("- ", "").replace("\n", ". ")
+
         project_data = {
             "Project": project[0],
             "Environment": project[1],
             "Outline": project[2].strip(),
-            "Responsibilities": project[3].strip()
+            "Responsibilities": responsibilities
         }
         profile_data["Work Summary"].append(project_data)
 
