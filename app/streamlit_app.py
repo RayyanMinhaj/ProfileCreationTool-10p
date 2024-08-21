@@ -8,7 +8,7 @@ API_URL = "https://profile-creation-tool-10p-cqmi.vercel.app"
 st.set_page_config(page_title="10Pearls User Profile Conversion Tool")
 
 st.title("10Pearls User Profile Creation")
-st.write('Converting old user profiles or CVs into a standardized format along with match percentage.')
+st.write('Converting old user profiles or CVs into a standardized format along with match percentage. Please make sure that the file names do not include "+".')
 st.markdown("""---""")
 
 
