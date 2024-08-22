@@ -56,7 +56,7 @@ def bold_text(paragraph, text):
 def gpt_response(old_doc_text, job_description):
     client = Client(api_key=key)
 
-    prompt = f"""Here is the CV/Resume of a person, I want you to efficiently convert the following profile into the new format provided below .
+    prompt = f"""Here is the CV/Resume of a person, I want you to efficiently convert the following profile into the new format provided below. While converting make sure there are no "I", "He", "She" etc. change first-person and third-person tones to emphasize action words more. 
     I also need you to compare the following job decription (which is basically a requirement or need for a person) with the person's profile and give me a percentage of how likely the person
     is to be a match for the job. I also want you to give me the missing keywords that are present in the job description but not in the person's profile  
     DO NOT output anything other than the new format!
