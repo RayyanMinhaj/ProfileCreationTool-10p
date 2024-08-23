@@ -183,6 +183,12 @@ def process_file():
         "Work Summary": []
     }
 
+    profile_data["Academic Summary"] = [line.replace('-', '•') for line in profile_data["Academic Summary"]]
+
+    profile_data["Academic Summary"].sort(key=lambda x: ("Bachelors" in x, "Masters" not in x))
+
+
+
     projects = re.findall(
     r"Project \d+: (.*?)\n\s*Environment:\s*(.*?)\n\s*Outline:\s*(.*?)\n\s*Responsibilities:\s*(.*?)(?=\nProject \d+:|$)",
     work_summary, re.DOTALL
@@ -242,35 +248,36 @@ def process_file():
         
 
 
-    # Replace Work summary
     for paragraph in new_file.paragraphs:
         if "${worksummary}" in paragraph.text:
             paragraph.clear()
             for project in profile_data["Work Summary"]:
                 table = new_file.add_table(rows=0, cols=2)
                 
-                # Add row for Environment
+                # Add row for Environment and Project
                 row_cells = table.add_row().cells
-                row_cells[0].text = "Environment:" + "\n" + project["Environment"]
-                bold_heading = project['Project']
                 
-                cell_paragraph = row_cells[1].paragraphs[0]
-                cell_paragraph.clear()
-                run = cell_paragraph.add_run(bold_heading)
-                run.bold = True
+                # Environment column
+                env_paragraph = row_cells[0].add_paragraph()
+                env_run = env_paragraph.add_run("Environment")
+                env_run.bold = True
+                env_paragraph.add_run("\n" + project["Environment"])
                 
-                # Add the rest of the outline text to the same paragraph
-                cell_paragraph.add_run("\n" + project["Outline"])
+                # Project column
+                proj_paragraph = row_cells[1].add_paragraph()
+                proj_run = proj_paragraph.add_run(project['Project'])
+                proj_run.bold = True
+                proj_paragraph.add_run("\n" + project["Outline"])
                 
-
+                # Add row for Responsibilities
                 row_cells = table.add_row().cells
                 row_cells[0].width = Inches(1)  # Adjust column width
                 row_cells[1].width = Inches(5)  # Adjust column width
                 row_cells[1].text = "Responsibilities:" "\n" + project["Responsibilities"]
                 
                 # Add space and border between tables
-
                 new_file.add_paragraph("\n")
+
 
 
 
