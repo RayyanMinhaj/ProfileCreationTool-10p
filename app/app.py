@@ -271,7 +271,7 @@ def process_file():
                 
                 # Add row for Responsibilities
                 row_cells = table.add_row().cells
-                row_cells[0].width = Inches(1)  # Adjust column width
+                row_cells[0].width = Inches(2)  # Adjust env column width
                 row_cells[1].width = Inches(5)  # Adjust column width
                 row_cells[1].text = "Responsibilities:" "\n" + project["Responsibilities"]
                 
