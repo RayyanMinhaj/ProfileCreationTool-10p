@@ -291,7 +291,7 @@ def process_file():
                 responsibilities_paragraph = row_cells[1].add_paragraph()
                 responsibilities_run = responsibilities_paragraph.add_run("Responsibilities: ")
                 responsibilities_run.bold = True
-                responsibilities_paragraph.add_run(project["Responsibilities"])
+                responsibilities_paragraph.add_run("\n" + project["Responsibilities"])
                 responsibilities_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
 
 
