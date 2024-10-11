@@ -12,6 +12,7 @@ from io import BytesIO
 from docx.shared import Pt
 from docx.oxml.ns import qn
 import docx2txt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = 'uploads'
@@ -262,19 +263,28 @@ def process_file():
                 env_run = env_paragraph.add_run("Environment")
                 env_run.bold = True
                 env_paragraph.add_run("\n" + project["Environment"])
+                env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 
                 # Project column
                 proj_paragraph = row_cells[1].add_paragraph()
                 proj_run = proj_paragraph.add_run(project['Project'])
                 proj_run.bold = True
                 proj_paragraph.add_run("\n" + project["Outline"])
+                env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 
                 # Add row for Responsibilities
                 row_cells = table.add_row().cells
-                row_cells[0].width = Inches(2)  # Adjust env column width
-                row_cells[1].width = Inches(5)  # Adjust column width
-                row_cells[1].text = "Responsibilities:" "\n" + project["Responsibilities"]
+                row_cells[0].width = Inches(4)  # Adjust env column width
+                row_cells[1].width = Inches(7)  # Adjust column width
+                #row_cells[1].text = "Responsibilities:" "\n" + project["Responsibilities"]
                 
+                responsibilities_paragraph = row_cells[1].add_paragraph()
+                responsibilities_run = responsibilities_paragraph.add_run("Responsibilities: ")
+                responsibilities_run.bold = True
+                responsibilities_paragraph.add_run("\n" + project["Responsibilities"])
+                env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+
+
                 # Add space and border between tables
                 new_file.add_paragraph("\n")
 
