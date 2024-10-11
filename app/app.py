@@ -266,12 +266,18 @@ def process_file():
                 env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 
                 # Project column
+                #proj_paragraph = row_cells[1].add_paragraph()
+                #proj_run = proj_paragraph.add_run(project['Project'])
+                #proj_run.bold = True
+                #proj_paragraph.add_run("\n" + project["Outline"])
+                #env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 proj_paragraph = row_cells[1].add_paragraph()
-                proj_run = proj_paragraph.add_run(project['Project'])
+                proj_run = proj_paragraph.add_run("Project: ")
                 proj_run.bold = True
-                proj_paragraph.add_run("\n" + project["Outline"])
-                env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
-                
+                proj_paragraph.add_run(project['Project'] + "\n" + project["Outline"])
+                proj_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY  
+
+
                 # Add row for Responsibilities
                 row_cells = table.add_row().cells
                 row_cells[0].width = Inches(4)  # Adjust env column width
