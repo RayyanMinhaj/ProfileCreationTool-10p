@@ -272,7 +272,7 @@ def process_file():
                 #proj_paragraph.add_run("\n" + project["Outline"])
                 #env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 proj_paragraph = row_cells[1].add_paragraph()
-                proj_run = proj_paragraph.add_run("Project: ")
+                proj_run = proj_paragraph.add_run("Project \n")
                 proj_run.bold = True
                 proj_paragraph.add_run(project['Project'] + "\n" + project["Outline"])
                 proj_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY  
