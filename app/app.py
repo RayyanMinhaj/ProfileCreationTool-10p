@@ -288,7 +288,7 @@ def process_file():
                 responsibilities_run = responsibilities_paragraph.add_run("Responsibilities: ")
                 responsibilities_run.bold = True
                 responsibilities_paragraph.add_run("\n" + project["Responsibilities"])
-                env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                responsibilities_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
 
 
                 # Add space and border between tables
