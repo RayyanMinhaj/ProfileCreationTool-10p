@@ -272,10 +272,14 @@ def process_file():
                 #proj_paragraph.add_run("\n" + project["Outline"])
                 #env_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                 proj_paragraph = row_cells[1].add_paragraph()
-                proj_run = proj_paragraph.add_run(project['Project'] + "\n")
+                proj_run = proj_paragraph.add_run(project['Project'])  # Add project title
                 proj_run.bold = True
-                proj_paragraph.add_run(project["Outline"])
-                proj_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY  
+                proj_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT  # Unjustified
+                
+                outline_paragraph = row_cells[1].add_paragraph()  # New paragraph for outline
+                outline_paragraph.add_run(project["Outline"])  # Add outline text
+                outline_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY  # Justify outline
+    
 
 
                 # Add row for Responsibilities
