@@ -22,37 +22,6 @@ key = os.getenv("OPENAI_API_KEY")
 
 
 
-def set_font_style(document, font_name='Arial'):
-    for paragraph in document.paragraphs:
-        for run in paragraph.runs:
-            run.font.name = font_name
-            run._element.rPr.rFonts.set(qn('w:eastAsia'), font_name) 
-
-    
-    for table in document.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for paragraph in cell.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = font_name
-                        run._element.rPr.rFonts.set(qn('w:eastAsia'), font_name)
-
-
-def replace_placeholder(paragraph, placeholder, replacement):
-    if paragraph.text == placeholder:
-        combined_text = "".join([run.text for run in paragraph.runs])
-        new_text = combined_text.replace(placeholder, replacement)
-            
-        # Clear existing runs and add the replaced text as a single run
-        for run in paragraph.runs:
-            run.text = ""
-        paragraph.runs[0].text = new_text
-    
-
-def bold_text(paragraph, text):
-    run = paragraph.add_run(text)
-    run.bold = True
-
 
 def gpt_response(old_doc_text, job_description):
     client = Client(api_key=key)
